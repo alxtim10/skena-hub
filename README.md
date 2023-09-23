@@ -1,6 +1,6 @@
 # Fashion E-Commerce Website
 
-# Skena Hub
+#Skena Hub
 Online Fashion E-Commerce Website
 
 stack : ReactJS + Vite, Tailwind
