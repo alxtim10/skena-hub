@@ -6,6 +6,7 @@ import Header from "./components/header/Header";
 import Women from "./routes/women/Women";
 import Sale from "./routes/sale/Sale";
 import Cart from "./routes/cart/Cart";
+import SignIn from "./routes/account/SignIn";
 // import { useEffect, useState } from "react";
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path="/women" element={<Women />} />
         <Route path="/sale" element={<Sale />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/login" element={<SignIn />} />
       </Route>
     </Routes>
   );
