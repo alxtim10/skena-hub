@@ -1,9 +1,25 @@
 import React, { useContext } from "react";
 import CartCard from "../../components/cart/CartCard";
 import { CartContext } from "../../contexts/cart.context";
+import Swal from "sweetalert2";
 
 function Cart() {
-  const { cartItems, cartTotal } = useContext(CartContext);
+  const { cartItems, cartTotal, clearCart } = useContext(CartContext);
+
+  const handlePurchase = async () => {
+    Swal.fire({
+      title: "Confirmation",
+      text: "Do you want to purchase?",
+      icon: "info",
+      confirmButtonText: "Confirm",
+      showCancelButton: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Purchased", "", "success");
+        clearCart();
+      }
+    });
+  };
 
   return (
     <section className="my-10 p-5 font-outfit">
@@ -14,13 +30,9 @@ function Cart() {
           </h1>
           <div className="h-[1px] w-56 bg-black"></div>
         </div>
-        {
-          cartItems.map((cartItem) => {
-            return (
-              <CartCard key={cartItem.id} cartItem={cartItem}/>
-            )
-          })
-        }
+        {cartItems.map((cartItem) => {
+          return <CartCard key={cartItem.id} cartItem={cartItem} />;
+        })}
       </div>
       <div className="lg:flex lg:justify-center">
         <div className="w-full lg:w-1/2 mt-20">
@@ -35,9 +47,14 @@ function Cart() {
           </div>
           <div className="flex justify-between text-lg font-outfit mt-5">
             <h1>Total</h1>
-            <h1 className="font-bold">Rp. {cartTotal+50000}</h1>
+            <h1 className="font-bold">Rp. {cartTotal + 50000}</h1>
           </div>
-          <button className="bg-black w-full mt-5 text-white p-4 rounded-md hover:border hover:border-black hover:bg-white hover:text-black transition-all duration-300">
+          <button
+            onClick={handlePurchase}
+            className={`${
+              cartItems.length == 0 ? "hidden" : "block"
+            } bg-black w-full mt-5 text-white p-4 rounded-md hover:border hover:border-black hover:bg-white hover:text-black transition-all duration-300`}
+          >
             Proceed to Checkout
           </button>
         </div>
